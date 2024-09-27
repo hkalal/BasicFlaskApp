@@ -93,7 +93,7 @@ stages:
                         cd "C:\TestFlaskDeployment\"
                                   
                                   # Use shell syntax for string concatenation
-                                  set envvar="env-" + $(Build.BuildId)
+                                  set envvar="env" + $(Build.BuildId)
                                   
                                   # Create virtual environment
                                   #Python -m venv %envvar%
