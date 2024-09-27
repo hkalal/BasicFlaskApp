@@ -138,24 +138,23 @@ stages:
               targetType: 'inline'
               script: |
                 # Write your PowerShell commands here.
-                  # Define paths and environment variables
-                  $pythonPath = "C:\Python312\python.exe"
-                  $wfastcgiScript = "C:\Python312\Lib\site-packages\wfastcgi.py"
-                  $physicalPath = "C:\TestFlaskDeployment"  # Update this to your actual application path
+                    # Define paths and environment variables
+                    $pythonPath = "C:\Python312\python.exe"
+                    $wfastcgiScript = "C:\Python312\Lib\site-packages\wfastcgi.py"
+                    $physicalPath = "C:\TestFlaskDeployment"  # Update this to your actual application path
 
-                  # Register the FastCGI application globally
-                  $fastCgiAppPath = "MACHINE/WEBROOT/APPHOST"
+                    # Register the FastCGI application globally
+                    $fastCgiAppPath = "MACHINE/WEBROOT/APPHOST"
 
 
-                  # Update WSGI Handler
-                  Set-WebConfigurationProperty -pspath "$fastCgiAppPath/$siteName/" -filter "system.webServer/handlers" -name "." -value @{
-                      name = 'Python FastCGI'
-                      path = "*"
-                      verb = "*"
-                      modules = "FastCgiModule"
-                      scriptProcessor = "$pythonPath|$wfastcgiScript"
-                      resourceType = "Either"
-                      requireAccess = "Script"
-                  }
+                    # Update WSGI Handler
+                    Set-WebConfigurationProperty -pspath "$fastCgiAppPath/$siteName/" -filter "system.webServer/handlers" -name "." -value @{
+                        name = 'Python FastCGI'
+                        path = "*"
+                        verb = "*"
+                        modules = "FastCgiModule"
+                        scriptProcessor = "$pythonPath|$wfastcgiScript"
+                        resourceType = "Either"
+                        requireAccess = "Script"
+                    }
                 Write-Host "Hello World"
-
