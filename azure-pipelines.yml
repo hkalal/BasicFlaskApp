@@ -91,8 +91,8 @@ stages:
                       echo Write your commands here
                       cd  "C:\TestFlaskDeployment\"
                       
-                      Python -m venv  "env-" + $(Build.BuildId)
-                      $envvar="env-" + $(Build.BuildId)
+                      Python -m venv  "env" + $(Build.BuildId)
+                      $envvar="env" + $(Build.BuildId)
 
                       $envvar\Scripts\activate.bat
                       echo Hello world
