@@ -99,7 +99,7 @@ stages:
                     Python -m venv %envvar%
 
                     # pip install wfastcgi
-                    pip install wfastcgi
+                    # pip install wfastcgi
 
                     # Activate the virtual environment
                     call %envvar%\Scripts\activate.bat
