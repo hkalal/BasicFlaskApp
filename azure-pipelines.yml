@@ -84,3 +84,14 @@ stages:
                 } else {
                     Write-Host "No zip file found in $zipFolder"
                 }
+
+                - task: CmdLine@2
+                  inputs:
+                    script: |
+                      echo Write your commands here
+                      cd  "C:\TestFlaskDeployment\"
+                      
+                      Python -m venv  env-$(Build.BuildId)
+                      
+                      env-$(Build.BuildId)\Scripts\activate.bat
+                      echo Hello world
