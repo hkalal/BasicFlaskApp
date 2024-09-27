@@ -138,6 +138,7 @@ stages:
                   $pythonPath = "C:\Python312\python.exe"
                   $wfastcgiScript = "C:\Python312\Lib\site-packages\wfastcgi.py"
                   $physicalPath = "C:\TestFlaskDeployment"  # Update this to your actual application path
+                  $siteName = "TestFlaskDeployment"
 
                   # Register the FastCGI application globally
                   $fastCgiAppPath = "MACHINE/WEBROOT/APPHOST"
