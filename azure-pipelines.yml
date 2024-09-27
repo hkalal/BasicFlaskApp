@@ -85,14 +85,22 @@ stages:
                     Write-Host "No zip file found in $zipFolder"
                 }
 
+    
                 - task: CmdLine@2
                   inputs:
                     script: |
                       echo Write your commands here
-                      cd  "C:\TestFlaskDeployment\"
+                        cd "C:\TestFlaskDeployment\"
+                                  
+                                  # Use shell syntax for string concatenation
+                                  set envvar=env-$(Build.BuildId)
+                                  
+                                  # Create virtual environment
+                                  Python -m venv %envvar%
                       
-                      Python -m venv  "env" + $(Build.BuildId)
-                      $envvar="env" + $(Build.BuildId)
-
-                      $envvar\Scripts\activate.bat
+                                  # Activate the virtual environment
+                                  call %envvar%\Scripts\activate.bat
+                      
+                                  # Verify that the environment is active
+                                  echo Hello world
                       echo Hello world
