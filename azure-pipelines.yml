@@ -138,7 +138,7 @@ stages:
               targetType: 'inline'
               script: |
                 # Write your PowerShell commands here.
-                # Define paths and environment variables
+                  # Define paths and environment variables
                   $pythonPath = "C:\Python312\python.exe"
                   $wfastcgiScript = "C:\Python312\Lib\site-packages\wfastcgi.py"
                   $physicalPath = "C:\TestFlaskDeployment"  # Update this to your actual application path
@@ -157,7 +157,5 @@ stages:
                       resourceType = "Either"
                       requireAccess = "Script"
                   }
-
-                 
-
                 Write-Host "Hello World"
+
