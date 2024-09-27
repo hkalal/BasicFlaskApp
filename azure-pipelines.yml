@@ -98,7 +98,30 @@ stages:
                     # Create virtual environment
                     Python -m venv %envvar%
 
-                    # Activate the virtual environment
-                    call %envvar%\Scripts\activate.bat
+                    # pip install wfastcgi
+                    pip install wfastcgi
                 echo Hello world
                
+          - task: IISWebAppManagementOnMachineGroup@0
+            inputs:
+              IISDeploymentType: 'IISWebsite'
+              ActionIISWebsite: 'CreateOrUpdateWebsite'
+              WebsiteName: 'TestFlaskDeployment'
+              WebsitePhysicalPath: 'C:\TestFlaskDeployment'
+              WebsitePhysicalPathAuth: 'WebsiteUserPassThrough'
+              AddBinding: true
+              Bindings: |
+                {
+                   "bindings":[{
+                                  "protocol":"http",
+                                  "ipAddress":"*",
+                                  "port":"15",
+                                  "sslThumbprint":"",
+                                  "sniFlag":false 
+                              }]
+                }                                     
+              CreateOrUpdateAppPoolForWebsite: true
+              AppPoolNameForWebsite: 'TestFlaskDeployment-app-pool'
+              DotNetVersionForWebsite: 'No Managed Code'
+              PipeLineModeForWebsite: 'Integrated'
+              AppPoolIdentityForWebsite: 'ApplicationPoolIdentity'
