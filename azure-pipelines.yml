@@ -92,19 +92,12 @@ stages:
                 
                   cd "C:\TestFlaskDeployment\"
 
-                   # Use shell syntax for string concatenation
-                   set envvar=env-$(Build.BuildId)
+                  set envvar=env-$(Build.BuildId)
       
-                    # Create virtual environment
-                    Python -m venv %envvar%
+                  Python -m venv %envvar%
 
-                    # pip install wfastcgi
-                    # pip install wfastcgi
+                  call %envvar%\Scripts\activate.bat
 
-                    # Activate the virtual environment
-                    call %envvar%\Scripts\activate.bat
-
-                    wfastcgi-enable
                 echo Hello world
                
           - task: IISWebAppManagementOnMachineGroup@0
