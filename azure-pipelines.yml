@@ -85,11 +85,12 @@ stages:
                     Write-Host "No zip file found in $zipFolder"
                 }
 
-    
-                - task: CmdLine@2
-                  inputs:
-                    script: |
-                      echo Write your commands here
-                        cd "C:\TestFlaskDeployment\"
-                       
-                      echo Hello world
+          - task: CmdLine@2
+            inputs:
+              script: |
+                echo Write your commands here
+                
+                  cd "C:\TestFlaskDeployment\"
+                  
+                echo Hello world
+               
