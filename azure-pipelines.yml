@@ -91,16 +91,6 @@ stages:
                     script: |
                       echo Write your commands here
                         cd "C:\TestFlaskDeployment\"
-                                  
-                                  # Use shell syntax for string concatenation
-                                  set envvar="env" + $(Build.BuildId)
-                                  
-                                  # Create virtual environment
-                                  #Python -m venv %envvar%
-                      
-                                  # Activate the virtual environment
-                                  call %envvar%\Scripts\activate.bat
-                      
-                                  # Verify that the environment is active
-                                  echo Hello world
+                        # Use shell syntax for string concatenation
+                        set envvar="env" + $(Build.BuildId)
                       echo Hello world
