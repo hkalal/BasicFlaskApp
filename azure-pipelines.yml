@@ -91,6 +91,5 @@ stages:
                     script: |
                       echo Write your commands here
                         cd "C:\TestFlaskDeployment\"
-                        # Use shell syntax for string concatenation
-                        set envvar="env" + $(Build.BuildId)
+                       
                       echo Hello world
