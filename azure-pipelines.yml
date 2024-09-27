@@ -102,7 +102,7 @@ stages:
 
                   wfastcgi-enable
 
-                echo Hello world
+                  echo Hello world
                
           - task: IISWebAppManagementOnMachineGroup@0
             inputs:
