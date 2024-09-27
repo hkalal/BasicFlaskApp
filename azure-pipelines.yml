@@ -91,6 +91,14 @@ stages:
                 echo Write your commands here
                 
                   cd "C:\TestFlaskDeployment\"
-                  
+
+                   # Use shell syntax for string concatenation
+                   set envvar=env-$(Build.BuildId)
+      
+                    # Create virtual environment
+                    Python -m venv %envvar%
+
+                    # Activate the virtual environment
+                    call %envvar%\Scripts\activate.bat
                 echo Hello world
                
