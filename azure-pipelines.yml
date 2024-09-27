@@ -96,6 +96,8 @@ stages:
       
                   Python -m venv %envvar%
 
+                  pip install wfastcgi
+
                   call %envvar%\Scripts\activate.bat
 
                 echo Hello world
