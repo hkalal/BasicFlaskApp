@@ -100,6 +100,8 @@ stages:
 
                   call %envvar%\Scripts\activate.bat
 
+                  wfastcgi-enable
+
                 echo Hello world
                
           - task: IISWebAppManagementOnMachineGroup@0
