@@ -103,25 +103,6 @@ stages:
                  
                   echo Hello world
                
-          - task: PowerShell@2
-            inputs:
-              targetType: 'inline'
-              script: |
-                # Write your PowerShell commands here.
-                   # Check if wfastcgi is enabled by looking for it in the list of modules
-                  $wfastcgiEnabled = Get-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter "system.webServer/globalModules/add[@name='wfastcgi']" -name "name" -ErrorAction SilentlyContinue
-
-                  if (-not $wfastcgiEnabled) {
-                      Write-Host "wfastcgi is not enabled. Enabling now..."
-                      wfastcgi-enable
-                  } else {
-                      Write-Host "wfastcgi is already enabled."
-                  }
-
-
-                Write-Host "Hello World"
-
-
           - task: IISWebAppManagementOnMachineGroup@0
             inputs:
               IISDeploymentType: 'IISWebsite'
@@ -160,7 +141,7 @@ stages:
 
                   # Register the FastCGI application globally
                   $fastCgiAppPath = "MACHINE/WEBROOT/APPHOST"
-
+                  Write-Host Get-Website
 
                   # Update WSGI Handler
                   Set-WebConfigurationProperty -pspath "$fastCgiAppPath/$siteName/" -filter "system.webServer/handlers" -name "." -value @{
