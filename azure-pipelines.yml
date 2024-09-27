@@ -1,13 +1,86 @@
+
 #trigger:
 #- main
 
 pool: AzureAgentPool
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: 'Build'
+  displayName: 'Build'
+  jobs:
+     - job: 
+       steps:
+       
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Programming'
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+            replaceExistingArchive: true
+          displayName: "ZIPing source files"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+        - task: CmdLine@2
+          inputs:
+            script: |
+              echo Write your commands here
+              rmdir /s /Q $(Pipeline.Workspace)\drop-Artifacts
+              echo Hello world
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop-Artifacts'
+            publishLocation: 'Container'
+          displayName: "Publish-Build-Artifacts"
+          
+
+- stage: Deploy
+  displayName: 'Deploy Web App'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeploymentJob
+    pool:
+      name: AzureAgentPool
+    environment: class16July2024
+    strategy:
+      runOnce: 
+        deploy:
+          steps:
+          
+          - task: CmdLine@2
+            inputs:
+              script: |
+                echo Write your commands here
+                rmdir /s /Q 'c:\TestFlaskDeployment\'
+                echo Hello world
+          
+
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(Pipeline.Workspace)\drop-Artifacts'
+              Contents: '**'
+              TargetFolder: 'c:\TestFlaskDeployment\'
+              CleanTargetFolder: true
+              OverWrite: true
+              flattenFolders: true
+              preserveTimestamp: true
+              ignoreMakeDirErrors: true
+  
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                $zipFolder = "C:\TestFlaskDeployment\"  # Folder where the zip file is located
+                $zipFile = Get-ChildItem -Path $zipFolder -Filter "*.zip" -File | Select-Object -First 1  # Find the first zip file
+
+                if ($zipFile) {
+                    $destination = $zipFolder  # Unzipping in the same folder
+                    Write-Host "Found zip file: $($zipFile.FullName)"
+                    
+                    # Unzip the file into the same folder
+                    Expand-Archive -Path $zipFile.FullName -DestinationPath $destination -Force
+                    Write-Host "Unzipped $($zipFile.FullName) to $destination"
+                } else {
+                    Write-Host "No zip file found in $zipFolder"
+                }
