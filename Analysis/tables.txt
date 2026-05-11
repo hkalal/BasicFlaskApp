@@ -62,12 +62,14 @@ CW_Billing_Terms
 GP_PM20000
 Ivanti_FRS_Survey
 CW_Contact_Portal_Access
+v_EDW_ETL_Ivanti_Audit_Change
 CW_Budget_Analysis
 GP_PM30200
 Ivanti_Audit_Frs_EVT_Event
 CW_Company
 GP_PM30300
 CRM_ProcessStageBase
+v_EDW_ETL_Ivanti_Audit_Frs_EVT_Event
 CRM_CampaignBase
 Ivanti_Audit_Incident
 CW_Contact
@@ -75,6 +77,7 @@ XactlyCEA_Stg_AmortizationSchedule
 Alert_Address
 CRM_CompetitorBase
 Ivanti_Employee
+v_EDW_ETL_Ivanti_Audit_Incident
 Ivanti_Audit_Problem
 CW_Owner_Level
 GP_EXT00103
@@ -122,6 +125,7 @@ C1_SolutionSegment
 Ivanti_Audit_Task
 CW_User_Defined_Field
 CRM_po_reportgroupallowedBase
+v_EDW_ETL_Ivanti_Audit_Task
 CW_Billing_Unit
 Ivanti_Task
 CRM_po_revenuecategoryBase
